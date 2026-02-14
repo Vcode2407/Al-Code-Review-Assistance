@@ -29,15 +29,16 @@
 
 ## 🎯 Overview
 
-AI-Powered Code Review Assistant is a comprehensive solution designed to streamline the code review process by leveraging artificial intelligence. The system analyzes code repositories, identifies potential issues, suggests improvements, and provides real-time feedback to development teams.
+AI-Powered Code Review Assistant streamlines the code review process using artificial intelligence.  
+It analyzes repositories, detects issues, suggests improvements, and provides real-time feedback to development teams.
 
 ### Why Use This Tool?
 
-- **Save Time**: Automate repetitive code review tasks
-- **Improve Quality**: Catch bugs and security vulnerabilities early
-- **Learn Best Practices**: Get AI-powered suggestions based on industry standards
-- **Team Collaboration**: Real-time collaborative review sessions
-- **Customizable**: Adapt to your organization's coding standards
+- **Save Time** – Automate repetitive review tasks  
+- **Improve Quality** – Catch bugs and vulnerabilities early  
+- **Learn Best Practices** – AI-powered suggestions based on industry standards  
+- **Team Collaboration** – Real-time collaborative review sessions  
+- **Customizable** – Adaptable to your organization’s coding standards  
 
 ---
 
@@ -45,67 +46,64 @@ AI-Powered Code Review Assistant is a comprehensive solution designed to streaml
 
 ### 🔍 Core Capabilities
 
-- **AI-Powered Code Analysis**
-  - Automated quality scoring for commits and pull requests
-  - Readability, maintainability, and complexity metrics
-  - Language-agnostic analysis supporting 20+ programming languages
+**AI-Powered Code Analysis**
+- Automated quality scoring for commits and pull requests  
+- Readability, maintainability, and complexity metrics  
+- Multi-language analysis support  
 
-- **Security Vulnerability Detection**
-  - SQL injection and XSS vulnerability scanning
-  - Unsafe dependency detection
-  - Weak cryptography identification
-  - Secrets and API key exposure prevention
+**Security Vulnerability Detection**
+- SQL Injection & XSS scanning  
+- Unsafe dependency detection  
+- Secrets and API key exposure detection  
 
-- **Performance Optimization**
-  - Identify redundant loops and inefficient algorithms
-  - Database query optimization suggestions
-  - Memory leak detection
-  - Resource usage analysis
+**Performance Optimization**
+- Identify inefficient loops and algorithms  
+- Database query optimization suggestions  
+- Memory/resource usage analysis  
 
-- **Version Control Integration**
-  - Seamless GitHub, GitLab, and Bitbucket integration
-  - Automatic PR/commit review via webhooks
-  - Inline code comments and suggestions
-  - CI/CD pipeline compatibility
+**Version Control Integration**
+- GitHub, GitLab, and Bitbucket integration  
+- Webhook-based PR/commit reviews  
+- Inline comments & CI/CD compatibility  
+
+---
 
 ### 🎨 Advanced Features
 
-- **Custom Rule Engine**: Define organization-specific coding standards and best practices
-- **Real-Time Collaboration**: Multi-developer live review sessions with Socket.IO
-- **AI Pair Programmer Mode**: Interactive coding assistance for real-time refactoring
-- **Generative Auto-Patches**: AI-generated code fixes ready for merge
-- **Context-Aware Learning**: Adapts to your repository's style and architecture
-- **ELI5 Mode**: Simplified explanations for junior developers
-- **Trend Forecasting**: Predict potential problem areas before bugs emerge
+- Custom Rule Engine  
+- Real-Time Collaboration (Socket.IO)  
+- AI Pair Programmer Mode  
+- Generative Auto-Patches  
+- Context-Aware Learning  
+- Simplified Explanation Mode (ELI5)  
 
 ---
 
 ## 🛠 Tech Stack
 
 ### Backend
-- **Runtime**: Node.js 18+
-- **Framework**: Express.js
-- **Language**: TypeScript
-- **Database**: PostgreSQL 14+
-- **ORM**: Prisma
-- **Real-time**: Socket.IO
+- Node.js 18+  
+- Express.js  
+- TypeScript  
+- PostgreSQL  
+- Prisma ORM  
+- Socket.IO  
 
 ### Frontend
-- **Framework**: React 18+
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **State Management**: React Context + Hooks
+- React 18+  
+- TypeScript  
+- Tailwind CSS  
+- shadcn/ui  
 
 ### AI & ML
-- **Models**: OpenAI GPT-4, Hugging Face Transformers
-- **Analysis**: CodeBERT for code embeddings
-- **NLP**: LangChain for advanced text processing
+- OpenAI Models  
+- Hugging Face Transformers  
+- LangChain  
 
 ### DevOps
-- **Containerization**: Docker & Docker Compose
-- **Orchestration**: Kubernetes ready
-- **CI/CD**: GitHub Actions compatible
+- Docker & Docker Compose  
+- Kubernetes Ready  
+- GitHub Actions Compatible  
 
 ---
 
@@ -113,244 +111,144 @@ AI-Powered Code Review Assistant is a comprehensive solution designed to streaml
 
 ### Prerequisites
 
-Ensure you have the following installed:
-- **Node.js** 18.x or higher
-- **npm** or **yarn**
-- **PostgreSQL** 14+ (or use Docker)
-- **Docker & Docker Compose** (recommended)
+- Node.js 18+  
+- npm or yarn  
+- PostgreSQL (or Docker)  
+- Docker & Docker Compose (recommended)  
+
+---
 
 ### Installation
 
 #### Option 1: Docker (Recommended)
 
 ```bash
-# Clone the repository
 git clone https://github.com/Vcode2407/AI-Code-Review-Assistance.git
 cd AI-Code-Review-Assistance
-
-# Start all services with Docker
 docker-compose up -d
+```
 
-# Access the application
-# Frontend: http://localhost:3000
-# Backend API: http://localhost:3001
-Option 2: Manual Setup
-bash
-# Clone the repository
+Frontend → http://localhost:3000  
+Backend → http://localhost:3001  
+
+---
+
+#### Option 2: Manual Setup
+
+```bash
 git clone https://github.com/Vcode2407/AI-Code-Review-Assistance.git
 cd AI-Code-Review-Assistance
 
-# Install root dependencies
 npm install
 
-# Install backend dependencies
 cd backend
 npm install
 npm run prisma:generate
 npm run prisma:migrate
 
-# Install frontend dependencies
 cd ../frontend
 npm install
 
-# Return to root and start development servers
 cd ..
 npm run dev
-⚙️ Configuration
-Environment Variables
-Create a .env file in the backend/ directory:
+```
 
-text
-# Database Configuration
-DATABASE_URL="postgresql://user:password@localhost:5432/code_review_db"
+---
 
-# AI Service Keys
-OPENAI_API_KEY="sk-your-openai-api-key-here"
-HUGGINGFACE_API_KEY="hf-your-huggingface-key-here"
+## ⚙️ Configuration
 
-# OAuth Configuration (Optional)
-GITHUB_CLIENT_ID="your-github-client-id"
-GITHUB_CLIENT_SECRET="your-github-client-secret"
+Create `.env` inside `backend/`:
 
-# Security
-JWT_SECRET="your-strong-random-jwt-secret"
-NODE_ENV="development"
-
-# Server Configuration
+```env
+DATABASE_URL=postgresql://user:password@localhost:5432/code_review_db
+OPENAI_API_KEY=your_openai_key
+JWT_SECRET=strong_secret_key
 PORT=3001
-FRONTEND_URL="http://localhost:3000"
-Obtaining API Keys
-OpenAI API Key: Get from OpenAI Platform
+FRONTEND_URL=http://localhost:3000
+```
 
-Hugging Face: Register at Hugging Face
+---
 
-GitHub OAuth: Create app at GitHub Developer Settings
+## 📁 Project Structure
 
-📁 Project Structure
-text
+```text
 AI-Code-Review-Assistance/
-├── backend/                    # Node.js API Server
-│   ├── src/
-│   │   ├── controllers/        # Request handlers
-│   │   ├── services/           # Business logic & AI integration
-│   │   │   ├── ai/             # AI analysis services
-│   │   │   ├── github/         # GitHub integration
-│   │   │   └── review/         # Code review logic
-│   │   ├── routes/             # API endpoints
-│   │   ├── middleware/         # Express middleware
-│   │   ├── utils/              # Helper functions
-│   │   └── types/              # TypeScript definitions
-│   ├── prisma/                 # Database schema & migrations
-│   ├── tests/                  # Unit & integration tests
-│   ├── Dockerfile
-│   └── package.json
-│
-├── frontend/                   # React Application
-│   ├── src/
-│   │   ├── components/         # Reusable UI components
-│   │   │   ├── common/         # Shared components
-│   │   │   ├── layout/         # Layout components
-│   │   │   └── reviews/        # Review-specific components
-│   │   ├── pages/              # Application pages
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── store/              # State management
-│   │   ├── services/           # API client services
-│   │   ├── types/              # TypeScript definitions
-│   │   └── utils/              # Helper functions
-│   ├── public/                 # Static assets
-│   ├── Dockerfile
-│   └── package.json
-│
-├── shared/                     # Shared code between backend & frontend
-│   ├── types/                  # Common TypeScript types
-│   └── constants/              # Shared constants
-│
-├── docker-compose.yml          # Development environment
-├── docker-compose.prod.yml     # Production environment
-├── .gitignore
+├── backend/
+├── frontend/
+├── shared/
+├── docker-compose.yml
+├── docker-compose.prod.yml
 ├── LICENSE
 └── README.md
-📡 API Documentation
-Reviews Endpoints
-text
-POST   /api/reviews              # Create new code review
-GET    /api/reviews              # List all reviews
-GET    /api/reviews/:id          # Get specific review details
-PUT    /api/reviews/:id          # Update review status
-DELETE /api/reviews/:id          # Delete review
-POST   /api/reviews/:id/comments # Add comment to review
-AI Analysis Endpoints
-text
-POST   /api/ai/analyze           # Analyze code snippet
-POST   /api/ai/explain           # Explain detected issue
-POST   /api/ai/auto-fix          # Generate automatic fix
-POST   /api/ai/suggest           # Get improvement suggestions
-Repository Management
-text
-GET    /api/repositories         # List connected repositories
-POST   /api/repositories         # Add new repository
-GET    /api/repositories/:id     # Get repository details
-DELETE /api/repositories/:id     # Remove repository connection
-Authentication
-text
-POST   /api/auth/login           # User login
-POST   /api/auth/register        # User registration
-POST   /api/auth/refresh         # Refresh access token
-GET    /api/auth/github          # GitHub OAuth
-🚢 Deployment
-Docker Production Deployment
-bash
-# Build and start production containers
+```
+
+---
+
+## 📡 API Documentation
+
+### Reviews
+```text
+POST   /api/reviews
+GET    /api/reviews
+GET    /api/reviews/:id
+PUT    /api/reviews/:id
+DELETE /api/reviews/:id
+```
+
+### AI Analysis
+```text
+POST /api/ai/analyze
+POST /api/ai/explain
+POST /api/ai/auto-fix
+POST /api/ai/suggest
+```
+
+### Authentication
+```text
+POST /api/auth/login
+POST /api/auth/register
+POST /api/auth/refresh
+```
+
+---
+
+## 🚢 Deployment
+
+### Docker Production
+```bash
 docker-compose -f docker-compose.prod.yml up -d
+```
 
-# View logs
-docker-compose -f docker-compose.prod.yml logs -f
+### Frontend Hosting
+- Vercel / Netlify  
 
-# Stop containers
-docker-compose -f docker-compose.prod.yml down
-Kubernetes Deployment
-bash
-# Apply Kubernetes configurations
-kubectl apply -f k8s/namespace.yaml
-kubectl apply -f k8s/secrets.yaml
-kubectl apply -f k8s/database.yaml
-kubectl apply -f k8s/backend.yaml
-kubectl apply -f k8s/frontend.yaml
-kubectl apply -f k8s/ingress.yaml
+### Backend Hosting
+- Railway / Render / AWS  
 
-# Check deployment status
-kubectl get pods -n code-review-assistant
-Cloud Platform Deployment
-Vercel (Frontend)
-Connect your GitHub repository
+---
 
-Set environment variables in Vercel dashboard
+## 🤝 Contributing
 
-Deploy automatically on push to main branch
+1. Fork the repository  
+2. Create a feature branch  
+3. Commit changes  
+4. Push and open a Pull Request  
 
-Railway/Render (Backend)
-Connect GitHub repository
+---
 
-Add PostgreSQL database addon
+## 📄 License
 
-Configure environment variables
+MIT License © 2026 Vcode2407
 
-Deploy backend service
+---
 
-🤝 Contributing
-Contributions are welcome! Here's how you can help:
+## 📧 Contact
 
-Development Workflow
-Fork the repository
+GitHub: https://github.com/Vcode2407
 
-Create a feature branch
-
-bash
-git checkout -b feature/amazing-feature
-Make your changes and commit
-
-bash
-git commit -m "Add amazing feature"
-Push to your fork
-
-bash
-git push origin feature/amazing-feature
-Open a Pull Request
-
-Code Standards
-Follow TypeScript best practices
-
-Write unit tests for new features
-
-Update documentation as needed
-
-Follow existing code style (ESLint/Prettier configured)
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-Copyright © 2026 Vcode2407
-
-📧 Contact & Support
-Developer: Vcode2407
-
-GitHub: @Vcode2407
-
-Project Repository: 
-AI-Code-Review-Assistance
-
-Issues: Report a bug
-
-Get Help
-📖 Check the documentation
-
-🐛 Report bugs via GitHub Issues
-
-💬 Join discussions in GitHub Discussions
+---
 
 <div align="center">
-⭐ If you find this project useful, please consider giving it a star!
-
+⭐ If you found this project useful, consider giving it a star!  
 Made with ❤️ by Vcode2407
-
-</div> ```
+</div>
