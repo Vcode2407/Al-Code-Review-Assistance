@@ -1,1 +1,55 @@
-import React, { useState } from "react"; import axios from "axios"; import ReactMarkdown from "react-markdown"; import remarkGfm from "remark-gfm"; import "./App.css"; function App() { const [code, setCode] = useState(""); const [review, setReview] = useState(""); const [loading, setLoading] = useState(false); const API_URL = "https://cuhpemmwjabfzkaithcm.supabase.co/functions/v1/ai-review"; const handleReview = async () => { if (!code) return alert("Paste code first!"); setLoading(true); setReview(""); try { const response = await axios.post(API_URL, { code }); setReview(response.data.review); } catch (e) { setReview("## Error\\nCould not connect to the AI service."); } finally { setLoading(false); } }; return ( <div className="App"> <nav className="navbar"> <div className="logo">AI Audit Pro</div> <div className="status">Gemini 2.5 Active</div> </nav> <div className="main-grid"> <section className="editor-section"> <h3>Source Code</h3> <textarea value={code} onChange={(e) => setCode(e.target.value)} placeholder="// Paste code for security audit..." /> <button className="primary-btn" onClick={handleReview} disabled={loading}> {loading ? "Analyzing..." : "Run Audit"} </button> </section> <section className="review-section"> <h3>Review Report</h3> <div className="markdown-container"> {!review && !loading && <p className="empty">Reports will appear here after analysis.</p>} {loading && <div className="loader">Scanning for vulnerabilities...</div>} <ReactMarkdown remarkPlugins={[remarkGfm]}>{review}</ReactMarkdown> </div> </section> </div> </div> ); } export default App;
+import React, { useState } from "react";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import CodeReviewer from "./components/CodeReviewer"; 
+
+function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  // Handle Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  // If no token, show Login or Register
+  if (!token) {
+    return (
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+        {isRegistering ? (
+          <div className="w-full max-w-md">
+            <Register onToggle={() => setIsRegistering(false)} />
+            <p className="text-center text-gray-400 mt-4">
+              Already have an account?{" "}
+              <button 
+                onClick={() => setIsRegistering(false)} 
+                className="text-blue-500 hover:underline"
+              >
+                Login here
+              </button>
+            </p>
+          </div>
+        ) : (
+          <div className="w-full max-w-md">
+            <Login onLogin={(newToken) => setToken(newToken)} />
+            <p className="text-center text-gray-400 mt-4">
+              Don't have an account?{" "}
+              <button 
+                onClick={() => setIsRegistering(true)} 
+                className="text-blue-500 hover:underline"
+              >
+                Sign up here
+              </button>
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // If token exists, show the main Audit dashboard
+  return <CodeReviewer token={token} onLogout={handleLogout} />;
+}
+
+export default App;
