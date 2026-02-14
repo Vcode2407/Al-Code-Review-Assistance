@@ -34,3 +34,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));// Force Update 
 // Force Update 
 // Deployment Sync v2 
+app.get("/env-test", (req, res) = res.json({ hasJwtSecret: !!process.env.JWT_SECRET, hasGeminiKey: !!process.env.GEMINI_API_KEY, nodeEnv: process.env.NODE_ENV }); }); 
