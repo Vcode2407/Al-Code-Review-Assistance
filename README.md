@@ -5,7 +5,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white)](https://nodejs.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
 
-> 🤖 An intelligent AI-driven system that automates code reviews, detects vulnerabilities, and provides actionable improvement suggestions for modern development teams.
+> 🤖 An intelligent AI-driven platform that automates code reviews, detects vulnerabilities, and provides actionable improvement suggestions for modern development teams.
 
 **Developed by [Vcode2407](https://github.com/Vcode2407)**
 
@@ -14,11 +14,12 @@
 ## 📋 Table of Contents
 
 - [Overview](#overview)
+- [Live Deployment](#live-deployment)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
 - [Configuration](#configuration)
+- [Project Structure](#project-structure)
 - [API Documentation](#api-documentation)
 - [Deployment](#deployment)
 - [Contributing](#contributing)
@@ -29,16 +30,44 @@
 
 ## 🎯 Overview
 
-AI-Powered Code Review Assistant streamlines the code review process using artificial intelligence.  
+AI-Powered Code Review Assistant streamlines the code review lifecycle using artificial intelligence.  
 It analyzes repositories, detects issues, suggests improvements, and provides real-time feedback to development teams.
 
 ### Why Use This Tool?
 
 - **Save Time** – Automate repetitive review tasks  
-- **Improve Quality** – Catch bugs and vulnerabilities early  
-- **Learn Best Practices** – AI-powered suggestions based on industry standards  
-- **Team Collaboration** – Real-time collaborative review sessions  
-- **Customizable** – Adaptable to your organization’s coding standards  
+- **Improve Quality** – Catch bugs and security issues early  
+- **Learn Best Practices** – AI-generated improvement suggestions  
+- **Collaborate Easily** – Multi-developer real-time sessions  
+- **Customizable** – Adapt to organization-specific coding standards  
+
+---
+
+## 🌐 Live Deployment
+
+The project is fully deployed and publicly accessible.
+
+### Frontend (Vercel)
+- **Platform:** Vercel  
+- **Live URL:** https://ai-code-review-assistant-kappa.vercel.app  
+- Auto-deploys on every push to `main`  
+- Global CDN & optimized static delivery  
+
+### Backend API (Render)
+- **Platform:** Render  
+- **Live URL:** https://ai-code-review-assistance.onrender.com  
+- Node.js Web Service with environment variable security  
+- Connected PostgreSQL database  
+
+### Architecture Overview
+
+```
+User → Vercel (React Frontend)
+        ↓
+     Render (Node.js Backend API)
+        ↓
+     PostgreSQL Database
+```
 
 ---
 
@@ -47,31 +76,31 @@ It analyzes repositories, detects issues, suggests improvements, and provides re
 ### 🔍 Core Capabilities
 
 **AI-Powered Code Analysis**
-- Automated quality scoring for commits and pull requests  
+- Automated scoring for commits and pull requests  
 - Readability, maintainability, and complexity metrics  
-- Multi-language analysis support  
+- Multi-language support  
 
 **Security Vulnerability Detection**
 - SQL Injection & XSS scanning  
-- Unsafe dependency detection  
-- Secrets and API key exposure detection  
+- Unsafe dependency checks  
+- Secret & API key exposure detection  
 
 **Performance Optimization**
-- Identify inefficient loops and algorithms  
-- Database query optimization suggestions  
-- Memory/resource usage analysis  
+- Identify inefficient loops & algorithms  
+- Query optimization suggestions  
+- Memory/resource usage insights  
 
 **Version Control Integration**
-- GitHub, GitLab, and Bitbucket integration  
-- Webhook-based PR/commit reviews  
-- Inline comments & CI/CD compatibility  
+- GitHub, GitLab, Bitbucket compatibility  
+- Webhook-based PR reviews  
+- Inline comments & CI/CD pipeline support  
 
 ---
 
 ### 🎨 Advanced Features
 
 - Custom Rule Engine  
-- Real-Time Collaboration (Socket.IO)  
+- Real-Time Collaboration via Socket.IO  
 - AI Pair Programmer Mode  
 - Generative Auto-Patches  
 - Context-Aware Learning  
@@ -110,7 +139,6 @@ It analyzes repositories, detects issues, suggests improvements, and provides re
 ## 🚀 Getting Started
 
 ### Prerequisites
-
 - Node.js 18+  
 - npm or yarn  
 - PostgreSQL (or Docker)  
@@ -223,7 +251,7 @@ docker-compose -f docker-compose.prod.yml up -d
 - Vercel / Netlify  
 
 ### Backend Hosting
-- Railway / Render / AWS  
+- Render / Railway / AWS  
 
 ---
 
@@ -244,11 +272,13 @@ MIT License © 2026 Vcode2407
 
 ## 📧 Contact
 
-GitHub: https://github.com/Vcode2407
+GitHub: https://github.com/Vcode2407  
 
 ---
 
 <div align="center">
+
 ⭐ If you found this project useful, consider giving it a star!  
 Made with ❤️ by Vcode2407
+
 </div>
