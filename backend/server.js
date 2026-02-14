@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv';`nimport authRoutes from './routes/authRoutes.js';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 // Import the security middleware you just created
 import { verifyToken, authorizeRoles } from './middleware/auth.js';
@@ -13,7 +13,7 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 // Standard Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json());`napp.use('/auth', authRoutes);
 
 // 1. Public Route: Verification (No token needed)
 app.get('/', (req, res) => res.send('AI Code Reviewer API is Live!'));
