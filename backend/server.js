@@ -1,3 +1,29 @@
-import express from 'express'; import cors from 'cors'; import dotenv from 'dotenv'; import { GoogleGenerativeAI } from '@google/generative-ai'; dotenv.config(); const app = express(); app.use(cors()); app.use(express.json()); const genAI = new GoogleGenerativeAI(process.env.OPENAI_API_KEY); const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' }); app.post('/review', async (req, res) => { try { const { code } = req.body; if (!code) return res.status(400).json({ error: 'Code is required' }); const prompt = 'You are a professional code reviewer. Review this code and provide improvements:\\n\\n' + code; const result = await model.generateContent(prompt); const response = await result.response; const text = response.text(); res.json({ review: text }); } catch (error) { console.error('Gemini Error:', error.message); res.status(500).json({ error: 'Internal Server Error', details: error.message }); } }); const PORT = process.env.PORT || 10000; app.listen(PORT, () => { console.log('?? Server running on port ' + PORT); });
-app.get('/', (req, res) = Code Reviewer API is Live!')); 
-app.get('/', (req, res) = Code Reviewer API is Live!')); 
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// 1. Root Route (Shows in browser when you visit the link)
+app.get('/', (req, res) => {
+    res.send('AI Code Reviewer API is Live!');
+});
+
+// 2. Review Route (This is what your frontend will call)
+app.post('/review', async (req, res) => {
+    // Put your Gemini API logic here later
+    res.json({ message: "Review endpoint reached!" });
+});
+
+// 3. Start the Server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
