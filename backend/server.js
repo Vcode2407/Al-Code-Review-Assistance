@@ -1,39 +1,34 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { verifyToken, authorizeRoles } from './middleware/auth.js';
 
-const users = []; 
+dotenv.config();
+const app = express();
 
-export const register = async (req, res) => {
+app.use(cors());
+app.use(express.json());
+
+// Main Auth Route Link
+app.use('/auth', authRoutes); 
+
+app.get('/', (req, res) => res.send('AI Code Reviewer API is Live!'));
+
+// Code Review Route
+app.post('/review', verifyToken, authorizeRoles('user', 'admin'), async (req, res) => {
     try {
-        const { email, password, role } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        users.push({ 
-            id: users.length + 1, 
-            email, 
-            password: hashedPassword, 
-            role: role || 'user' 
-        });
-        res.status(201).json({ message: 'User registered!' });
+        const { code } = req.body;
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const prompt = `Review this code for security: \n${code}`;
+        const result = await model.generateContent(prompt);
+        res.json({ review: result.response.text() });
     } catch (error) {
-        res.status(500).json({ message: 'Registration failed' });
+        res.status(500).json({ error: "Audit failed" });
     }
-};
+});
 
-export const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = users.find(u => u.email === email);
-        if (user && await bcrypt.compare(password, user.password)) {
-            const token = jwt.sign(
-                { id: user.id, role: user.role }, 
-                process.env.JWT_SECRET, 
-                { expiresIn: '1h' }
-            );
-            res.json({ token });
-        } else {
-            res.status(401).json({ message: 'Invalid credentials' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Login failed' });
-    }
-};
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
