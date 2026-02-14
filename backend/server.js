@@ -1,4 +1,4 @@
-import express from 'express';
+import express from 'express'; // Added this missing line
 import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
@@ -19,9 +19,9 @@ app.get('/', (req, res) => res.send('AI Code Reviewer API is Live!'));
 app.post('/review', verifyToken, authorizeRoles('user', 'admin'), async (req, res) => {
   try {
     const { code } = req.body;
-    // Corrected the variable name here
+    // Corrected to GEMINI_API_KEY
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = `Perform a deep security audit: \n\n${code}`;
     const result = await model.generateContent(prompt);
     res.json({ user: req.user.id, review: result.response.text() });
