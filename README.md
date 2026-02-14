@@ -55,7 +55,7 @@ The project is fully deployed and publicly accessible.
 
 ### Backend API (Render)
 - **Platform:** Render  
-- **Live URL:** https://ai-code-review-assistance.onrender.com  
+- **Live URL:** https://al-code-review-assistance.onrender.com  
 - Node.js Web Service with environment variable security  
 - Connected PostgreSQL database  
 
