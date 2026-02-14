@@ -15,28 +15,34 @@ const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/auth', authRoutes); // Auth routes (login/register)
+// Auth Routes (Login/Register) - This enables /auth/register and /auth/login
+app.use('/auth', authRoutes);
 
-// 1. Public Route: Verification
+// 1. Public Route: Server Verification
 app.get('/', (req, res) => res.send('AI Code Reviewer API is Live!'));
 
 // 2. Secure Route: Code Review
+// Requires a valid JWT and 'user' or 'admin' role
 app.post('/review', verifyToken, authorizeRoles('user', 'admin'), async (req, res) => {
   try {
     const { code } = req.body;
-    const prompt = `Perform a deep security and logic audit: \n\n${code}`;
+    
+    // High-impact prompt for professional code audits
+    const prompt = `Perform a deep security and logic audit on the following code. 
+    Identify vulnerabilities (XSS, SQLi, etc.) and suggest optimizations: \n\n${code}`;
+    
     const result = await model.generateContent(prompt);
     res.json({ 
-      user: req.user.id, 
+      user: req.user.id, // Demonstrates multi-user tracking
       review: result.response.text() 
     });
   } catch (error) {
+    console.error("Audit Error:", error);
     res.status(500).json({ error: "Audit failed" });
   }
 });
 
-// 3. Admin Only Route: Example of RBAC
+// 3. Admin Only Route: Example of Role-Based Access Control
 app.get('/admin/stats', verifyToken, authorizeRoles('admin'), (req, res) => {
     res.json({ message: "Welcome Admin, here are the system stats." });
 });
